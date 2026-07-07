@@ -62,8 +62,9 @@ def main() -> None:
     ap.add_argument("--epochs", type=int, default=40)
     ap.add_argument("--patience", type=int, default=8)
     ap.add_argument("--search-overlap", type=float, default=0.5,
-                    help="train-window overlap for the search fold (0.5 = ~5x fewer "
-                         "windows than the 0.9 used for final training; speeds up the search)")
+                    help="train/validation-window overlap for the search fold "
+                         "(0.5 = ~5x fewer windows than the 0.9 used for final "
+                         "LOSO training; speeds up the search)")
     ap.add_argument("--timeout", type=int, default=0, help="stop after N seconds (0 = no limit)")
     ap.add_argument("--founder-checkpoint",
                     default=str(Path("checkpoints") / "1_lead_ECGFounder.pth"))
@@ -76,7 +77,11 @@ def main() -> None:
     fck = _resolve_project_path(args.founder_checkpoint)
 
     # --- build the single fold's loaders ONCE and reuse across all trials ---
-    pcfg = PreprocessConfig(train_overlap=args.search_overlap, test_overlap=0.5)
+    pcfg = PreprocessConfig(
+        train_overlap=args.search_overlap,
+        val_overlap=args.search_overlap,
+        test_overlap=0.5,
+    )
     subjects = build_cache(data_root, cache_dir, pcfg)
     if not subjects:
         raise SystemExit(_missing_data_message(data_root))

@@ -107,14 +107,14 @@ at 250 Hz.
 
 For the current private LOSO protocol:
 
-- training windows use 90% overlap;
-- validation and test windows use 50% overlap;
-- the private processed cache produced 36,240 aggregate candidate windows at
+- training and validation windows use 90% overlap;
+- held-out test windows use 50% overlap;
+- the private processed cache produced 35,516 aggregate candidate windows at
   90% overlap;
 - the private processed cache produced 7,107 aggregate candidate windows at
   50% overlap;
-- each LOSO fold used roughly 29,880 to 29,993 training windows, 588 to 658
-  validation windows, and 567 to 658 test windows.
+- each LOSO fold uses roughly 29,283 to 29,394 training windows, 2,939 to 3,289
+  validation windows, and 567 to 658 held-out test windows.
 
 These are aggregate protocol counts computed from the private dataset. Raw
 recordings and subject-level sample counts are not publicly released.
@@ -158,12 +158,23 @@ FinalECGCombinedLoss with lambda=1.0, beta=10.0, gamma=5e-8, alpha=0.0, other_lo
 
 Because `other_loss=0`, the effective objective is pure MSE.
 
-| Model | Folds | PQRST-Pearson mean +/- std | Full Pearson | MSE | Best PQRST | Params | Theoretical size | vs SDCAE |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| **SDCAE (ours)** | 12 | **0.873 +/- 0.039** | **0.862** | **0.257** | 0.921 | 23,140 | **11.3 KB** packed 4-bit weights | 1.0x |
-| Deep-MF | 12 | 0.867 +/- 0.046 | 0.849 | 0.276 | **0.939** | 13,243 | 51.7 KB fp32 weights | 4.6x |
-| DCAE | 12 | 0.791 +/- 0.036 | 0.783 | 0.436 | 0.846 | 61,345 | 239.6 KB fp32 weights | 21.2x |
-| Deep-MF-mini | 12 | 0.775 +/- 0.041 | 0.766 | 0.456 | 0.827 | 13,555 | 52.9 KB fp32 weights | 4.7x |
+Accuracy:
+
+| Model | Folds | PQRST mean +/- std | Full r | MSE | Best PQRST |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| **SDCAE (ours)** | 12 | **0.873 +/- 0.039** | **0.862** | **0.257** | 0.921 |
+| Deep-MF | 12 | 0.867 +/- 0.046 | 0.849 | 0.276 | **0.939** |
+| DCAE | 12 | 0.791 +/- 0.036 | 0.783 | 0.436 | 0.846 |
+| Deep-MF-mini | 12 | 0.775 +/- 0.041 | 0.766 | 0.456 | 0.827 |
+
+Model footprint:
+
+| Model | Params | Weight format | Size vs SDCAE |
+| --- | ---: | --- | ---: |
+| **SDCAE (ours)** | 23,140 | **11.3 KB**, packed 4-bit | 1.0x |
+| Deep-MF | 13,243 | 51.7 KB, fp32 | 4.6x |
+| DCAE | 61,345 | 239.6 KB, fp32 | 21.2x |
+| Deep-MF-mini | 13,555 | 52.9 KB, fp32 | 4.7x |
 
 Paired t-tests against SDCAE over shared held-out folds:
 

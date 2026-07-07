@@ -5,6 +5,7 @@ data_root: data/private
 output_dir: outputs/loso
 models: sdcae,dcae,deep_mf,deep_mf_mini
 train_overlap: 0.9
+val_overlap: 0.9
 test_overlap: 0.5
 epochs: 200
 patience: 25

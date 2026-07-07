@@ -59,7 +59,8 @@ def main() -> None:
     ap.add_argument("--subject", default="", help="held-out subject (default: auto)")
     ap.add_argument("--epochs", type=int, default=40)
     ap.add_argument("--patience", type=int, default=8)
-    ap.add_argument("--search-overlap", type=float, default=0.5)
+    ap.add_argument("--search-overlap", type=float, default=0.5,
+                    help="train/validation-window overlap for the search fold")
     ap.add_argument("--timeout", type=int, default=0)
     args = ap.parse_args()
 
@@ -68,7 +69,11 @@ def main() -> None:
     cache_dir = _resolve_project_path(args.cache_dir) if args.cache_dir else out_dir / "cache"
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    pcfg = PreprocessConfig(train_overlap=args.search_overlap, test_overlap=0.5)
+    pcfg = PreprocessConfig(
+        train_overlap=args.search_overlap,
+        val_overlap=args.search_overlap,
+        test_overlap=0.5,
+    )
     subjects = build_cache(data_root, cache_dir, pcfg)
     if not subjects:
         raise SystemExit(_missing_data_message(data_root))

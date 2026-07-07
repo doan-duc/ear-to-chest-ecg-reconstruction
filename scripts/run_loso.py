@@ -42,6 +42,7 @@ DEFAULTS = {
     "cache_dir": None,
     "models": "sdcae,dcae,deep_mf,deep_mf_mini",
     "train_overlap": 0.9,
+    "val_overlap": 0.9,
     "test_overlap": 0.5,
     "epochs": 200,
     "patience": 25,
@@ -129,6 +130,7 @@ def _build_parser(defaults: dict) -> argparse.ArgumentParser:
                     help="preprocessing cache directory; defaults to <output-dir>/cache")
     ap.add_argument("--models", default=defaults["models"])
     ap.add_argument("--train-overlap", type=float, default=defaults["train_overlap"])
+    ap.add_argument("--val-overlap", type=float, default=defaults["val_overlap"])
     ap.add_argument("--test-overlap", type=float, default=defaults["test_overlap"])
     ap.add_argument("--epochs", type=int, default=defaults["epochs"])
     ap.add_argument("--patience", type=int, default=defaults["patience"])
@@ -207,7 +209,11 @@ def main() -> None:
         else output_dir / "metrics" / "loso_summary.csv"
     )
 
-    pcfg = PreprocessConfig(train_overlap=args.train_overlap, test_overlap=args.test_overlap)
+    pcfg = PreprocessConfig(
+        train_overlap=args.train_overlap,
+        val_overlap=args.val_overlap,
+        test_overlap=args.test_overlap,
+    )
     print(f"Data root: {data_root}", flush=True)
     print(f"Cache: {cache_dir}", flush=True)
     subjects = build_cache(data_root, cache_dir, pcfg, force=args.force_cache)

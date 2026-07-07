@@ -26,7 +26,8 @@ class PreprocessConfig:
     fs: int = 250
     window_sec: float = 2.0          # 500 samples at 250 Hz
     train_overlap: float = 0.9       # dense windows for training (stride = 50)
-    test_overlap: float = 0.5        # sparser windows for val/test (stride = 250)
+    val_overlap: float = 0.9         # validation follows training density
+    test_overlap: float = 0.5        # sparser windows for held-out testing (stride = 250)
     # Variable end trimming removes unstable boundaries while preserving usable signal.
     min_trim_sec: float = 5.0        # always drop at least this from each end
     env_win_sec: float = 1.0         # RMS-envelope window for stability check
@@ -105,7 +106,7 @@ def segment_windows(x: np.ndarray, cfg: PreprocessConfig, overlap: float,
                     axis: int = -1) -> np.ndarray:
     """Sliding windows. x: (..., T) → (..., n_windows, window_size)."""
     window_size = int(cfg.window_sec * cfg.fs)
-    stride = max(1, int(window_size * (1 - overlap)))
+    stride = max(1, int(round(window_size * (1 - overlap))))
     x = np.moveaxis(x, axis, -1)
     T = x.shape[-1]
     starts = range(0, T - window_size + 1, stride)

@@ -2,8 +2,9 @@
 
 The cache holds each subject's *continuous* filtered + trimmed signals (one .npz
 each) so preprocessing only runs once. Windowing and z-scoring happen at load
-time, which lets the train split use a dense overlap and the val/test splits a
-sparser one. Splitting into folds also happens in code — no pre-split files.
+time, which lets the train/validation splits use a dense overlap while the test
+split uses a sparser overlap. Splitting into folds also happens in code — no
+pre-split files.
 """
 from __future__ import annotations
 
@@ -60,8 +61,9 @@ def make_loaders(cache_dir, train_sids, test_sid, cfg: PreprocessConfig,
                  batch_size=128, val_sid=None, num_workers=0, seed=42):
     """Build train/val/test loaders.
 
-    Train subjects are windowed at ``cfg.train_overlap``; val/test subjects at
-    ``cfg.test_overlap``. If val_sid is None, one train subject is held out.
+    Train subjects are windowed at ``cfg.train_overlap``; the validation subject
+    at ``cfg.val_overlap``; and the test subject at ``cfg.test_overlap``. If
+    val_sid is None, one train subject is held out.
     """
     if val_sid is None:
         rng = np.random.default_rng(seed)
@@ -75,6 +77,6 @@ def make_loaders(cache_dir, train_sids, test_sid, cfg: PreprocessConfig,
                           num_workers=num_workers, pin_memory=torch.cuda.is_available())
 
     return (loader(train_only, cfg.train_overlap, True, True),
-            loader([val_sid], cfg.test_overlap, False),
+            loader([val_sid], cfg.val_overlap, False),
             loader([test_sid], cfg.test_overlap, False),
             {"train_subjects": train_only, "val_subject": val_sid, "test_subject": test_sid})
