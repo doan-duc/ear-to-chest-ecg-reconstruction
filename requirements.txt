@@ -1,0 +1,12 @@
+# Python 3.12
+#
+# If PyTorch needs a platform-specific wheel, install it separately with the
+# correct index for your machine, for example:
+#   pip install torch==2.11.0 --index-url https://download.pytorch.org/whl/cu128
+
+torch==2.11.0
+numpy==2.5.0
+scipy==1.18.0
+pandas==3.0.3
+matplotlib==3.11.0
+optuna>=3.6

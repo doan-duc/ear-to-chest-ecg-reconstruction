@@ -1,0 +1,17 @@
+# Private LOSO benchmark defaults.
+# CLI flags override these values when passed explicitly.
+mode: private
+data_root: data/private
+output_dir: outputs/loso
+models: sdcae,dcae,deep_mf,deep_mf_mini
+train_overlap: 0.9
+test_overlap: 0.5
+epochs: 200
+patience: 25
+batch_size: 128
+loss_type: combined
+lambda: 1.0
+beta: 10.0
+gamma: 5e-8
+alpha: 0.0
+other_loss: 0

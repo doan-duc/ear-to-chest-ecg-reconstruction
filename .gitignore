@@ -1,0 +1,111 @@
+# ---------------------------------------------------------------------------
+# Python caches and build artifacts
+# ---------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+build/
+dist/
+*.egg-info/
+
+# ---------------------------------------------------------------------------
+# Virtual environments and local package state
+# ---------------------------------------------------------------------------
+env/
+venv/
+.venv/
+ENV/
+.python-version
+pip-wheel-metadata/
+
+# ---------------------------------------------------------------------------
+# Jupyter / notebook scratch state
+# ---------------------------------------------------------------------------
+.ipynb_checkpoints/
+docs/reports/
+
+# ---------------------------------------------------------------------------
+# Local secrets and machine-specific config
+# ---------------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+*.local
+
+# ---------------------------------------------------------------------------
+# Data
+#
+# Raw ECG files are self-collected health/biometric data. Keep them local unless
+# an explicit consent/license/release boundary is documented.
+# Processed files are reproducible caches generated from private/local data.
+# ---------------------------------------------------------------------------
+data/raw/
+data/private/*
+!data/private/.gitkeep
+data/interim/
+data/processed/
+data/external/
+data/synthetic/demo/
+data/**/*.csv
+*.npz
+*.npy
+*.mat
+*.edf
+*.hea
+*.dat
+*.h5
+*.hdf5
+*.tdms
+
+# ---------------------------------------------------------------------------
+# Model weights and training checkpoints
+# ---------------------------------------------------------------------------
+checkpoints/
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.onnx
+
+# ---------------------------------------------------------------------------
+# Experiment run directories and generated/private result state
+# ---------------------------------------------------------------------------
+outputs/
+results/
+experiments/
+runs/
+wandb/
+mlruns/
+lightning_logs/
+
+# Public README figures should live under docs/figures/. Keep experiment
+# summaries/results local unless a release boundary is explicitly documented.
+*.log
+*.tmp
+*.temp
+*.db
+*.sqlite
+*.sqlite3
+
+# External paper snapshots and reference code should not be redistributed unless
+# licenses have been reviewed.
+model_paper_refs/
+
+# ---------------------------------------------------------------------------
+# OS and editor files
+# ---------------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+Desktop.ini
+ehthumbs.db
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
