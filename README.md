@@ -52,6 +52,16 @@ data. Full LOSO benchmark reproduction requires authorized local access to the
 private dataset. Reported benchmark results are released only as aggregate
 metrics.
 
+## Dataset Provenance
+
+The private paired ear-ECG/chest-reference ECG dataset used for the reported
+aggregate benchmark was collected by
+[EDABK Research Lab](https://sites.google.com/set.hust.edu.vn/hust-edabk-lab/),
+School of Electrical and Electronic Engineering, Hanoi University of Science and
+Technology (HUST). The EDABK web page is provided to identify the collecting
+lab; it is not a public data-release page, and the raw subject-level ECG
+recordings remain private.
+
 ## Data Release Boundary
 
 Public:

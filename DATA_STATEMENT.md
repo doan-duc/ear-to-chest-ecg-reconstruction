@@ -4,6 +4,11 @@
 
 Dataset name: private paired ear-ECG and chest-reference ECG dataset.
 
+Provenance: the private paired dataset used for the reported aggregate
+benchmark was collected by [EDABK Research Lab](https://sites.google.com/set.hust.edu.vn/hust-edabk-lab/),
+School of Electrical and Electronic Engineering, Hanoi University of Science and
+Technology (HUST).
+
 Release status: the full raw dataset is not publicly released.
 
 Reason: participant privacy and ECG data-governance constraints.

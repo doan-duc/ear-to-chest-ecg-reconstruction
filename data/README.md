@@ -3,6 +3,12 @@
 The full paired ear-ECG and chest-reference ECG dataset is private and is not
 publicly released from this repository.
 
+The private paired dataset used for the reported aggregate benchmark was
+collected by [EDABK Research Lab](https://sites.google.com/set.hust.edu.vn/hust-edabk-lab/),
+School of Electrical and Electronic Engineering, Hanoi University of Science and
+Technology (HUST). This attribution identifies the collecting lab; it does not
+make the raw subject-level recordings public.
+
 Public data under this directory is limited to documentation, placeholders, and
 synthetic or tiny anonymized examples that demonstrate code behavior. Public
 sample or synthetic data must not be used to claim scientific performance.
