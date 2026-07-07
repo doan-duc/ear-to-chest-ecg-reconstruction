@@ -160,12 +160,12 @@ Because `other_loss=0`, the effective objective is pure MSE.
 
 Accuracy:
 
-| Model | Folds | PQRST mean +/- std | Full r | MSE | Best PQRST |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| **SDCAE (ours)** | 12 | **0.873 +/- 0.039** | **0.862** | **0.257** | 0.921 |
-| Deep-MF | 12 | 0.867 +/- 0.046 | 0.849 | 0.276 | **0.939** |
-| DCAE | 12 | 0.791 +/- 0.036 | 0.783 | 0.436 | 0.846 |
-| Deep-MF-mini | 12 | 0.775 +/- 0.041 | 0.766 | 0.456 | 0.827 |
+| Model | PQRST mean +/- std | Full r | MSE | Best PQRST |
+| --- | ---: | ---: | ---: | ---: |
+| **SDCAE (ours)** | **0.873 +/- 0.039** | **0.862** | **0.257** | 0.921 |
+| Deep-MF | 0.867 +/- 0.046 | 0.849 | 0.276 | **0.939** |
+| DCAE | 0.791 +/- 0.036 | 0.783 | 0.436 | 0.846 |
+| Deep-MF-mini | 0.775 +/- 0.041 | 0.766 | 0.456 | 0.827 |
 
 Model footprint:
 
@@ -175,14 +175,6 @@ Model footprint:
 | Deep-MF | 13,243 | 51.7 KB, fp32 | 4.6x |
 | DCAE | 61,345 | 239.6 KB, fp32 | 21.2x |
 | Deep-MF-mini | 13,555 | 52.9 KB, fp32 | 4.7x |
-
-Paired t-tests against SDCAE over shared held-out folds:
-
-| Comparison | Mean PQRST difference | p-value | Interpretation |
-| --- | ---: | ---: | --- |
-| SDCAE vs Deep-MF | +0.0062 | 0.2160 | statistically tied on 12 folds |
-| SDCAE vs DCAE | +0.0822 | 0.0001 | SDCAE higher in this aggregate run |
-| SDCAE vs Deep-MF-mini | +0.0988 | 0.0001 | SDCAE higher in this aggregate run |
 
 The conservative conclusion is that SDCAE matches the strongest full-precision
 baseline in aggregate while using a smaller theoretical packed weight footprint.
